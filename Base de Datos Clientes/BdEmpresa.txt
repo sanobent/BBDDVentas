@@ -1,0 +1,142 @@
+--Tablas de Cliente
+Create table Cliente(
+Id_Cliente int IDENTITY(1,1) primary key not null,
+RazonSocial varchar(10) not null,
+NroReferencia varchar(15) not null,
+CUIL varchar(11) not null,
+Id_Tipo int not null,
+Id_Estado int not null,
+);
+
+Create table TipoEmpresa(
+Id_Tipo int IDENTITY(1,1) primary key not null,
+Tipo varchar(10) not null,
+);
+
+Create table Estado_Cuenta(
+Id_Estado int IDENTITY(1,1) primary key not null,
+Id_TipoEstado int not null,
+Detalles varchar(30) not null
+);
+
+Create Table Tipo_Estado(
+Id_TipoEstado int IDENTITY(1,1) primary key not null,
+Estado varchar(20) not null,
+);
+
+Create table Telefono(
+Id_Telefono int IDENTITY(1,1) primary key not null,
+Telefono varchar(16) not null,
+Detalles varchar(100) not null,
+Id_Cliente int not null
+);
+
+Create table Correo(
+Id_Correo int IDENTITY(1,1) primary key not null,
+Correo varchar(64) not null,
+Detalles varchar(100) not null,
+Id_Cliente int not null
+);
+
+Create table Domicilio_Cliente(
+Id_DomicilioC int IDENTITY(1,1) primary key not null,
+Id_Provincia int not null,
+Ciudad varchar(50) not null,
+Calle varchar(30) not null,
+Altura varchar(8) not null,
+Piso varchar(20) not null,
+Departamento varchar(30) not null,
+Id_TipoDomicilio int not null,
+Id_Cliente int not null
+);
+
+
+Create table Provincia(
+Id_Provincia int IDENTITY(1,1) primary key not null,
+Provincia varchar(20) not null,
+Id_Pais int not null
+);
+
+
+Create table Pais(
+Id_Pais int IDENTITY(1,1) Primary key not null,
+Pais varchar(30) not null
+);
+
+Create table TipoDomicilio(
+Id_TipoDomicilio int IDENTITY(1,1) primary key not null,
+Tipo_Domicilio varchar(10) not null,
+);
+--Tablas de Productos
+Create table MarcaProducto(
+Id_MarcaP int IDENTITY(1,1) primary key not null,
+MarcaP varchar(20) not null,
+
+);
+
+Create table TipoProducto(
+Id_TipoP int IDENTITY(1,1) primary key not null,
+Id_MarcaP int not null,
+TipoProd varchar(20) not null
+);
+
+Create table Producto(
+Id_Producto int IDENTITY(1,1) primary key not null,
+Id_TipoP int not null,
+Descripcion varchar(100) not null,
+Precio int not null,
+);
+
+Create table Partida(
+Id_Partida int IDENTITY(1,1) primary key not null,
+NroPartida varchar(30) not null,
+Vencimiento date not null,
+Id_Ubicacion int not null,
+Cantidad int not null,
+Id_Producto int not null,
+Id_CantidadT int not null,
+);
+
+Create table Ubicacion(
+Id_Ubicacion int IDENTITY(1,1) primary key not null,
+Pasillo varchar(10) not null,
+Fila varchar(10) not null,
+Columna varchar(10) not null,
+);
+Create table TotalProducto(
+Id_CantidadT int IDENTITY(1,1) primary key not null,
+Cantidad int not null,
+);
+--Factura
+Create table Facturacion(
+Id_Factura int IDENTITY(1,1) primary key not null,
+NroFactura int not null,
+Id_Cliente int not null,
+Fecha date not null,
+EstadoFac varchar(10) not null,
+TotalCobrar int not null,
+);
+Create table DetalleFactura(
+Id_DFactura int IDENTITY(1,1) primary key not null,
+Id_Factura int not null,
+Precio int not null,
+Cantidad int not null,
+Id_Partida int not null
+);
+
+Create table NotaDePedido(
+Id_Nota int IDENTITY(1,1) primary key not null,
+NroReferencia Varchar(20) not null,
+Estado Varchar(20) not null,
+Fecha date not null,
+Id_Cliente int not null,
+);
+Create Table DetalleNota(
+Id_DNota int IDENTITY(1,1) primary key not null,
+Id_Nota int not null,
+Precio int not null,
+Cantidad int not null,
+MarcaP varchar(20) not null,
+TipoProd varchar(20) not null,
+Descripcion varchar(100) not null,
+);

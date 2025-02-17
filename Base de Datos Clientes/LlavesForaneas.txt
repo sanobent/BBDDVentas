@@ -1,0 +1,82 @@
+--FK Clientes
+
+alter table Cliente
+add constraint FK_Tipo_Empresa_Cliente foreign key (Id_Tipo) references TipoEmpresa(Id_Tipo);
+
+alter table Cliente
+add constraint FK_Estado_Cuenta_Cliente foreign key (Id_Estado) references Estado_Cuenta(Id_Estado);
+
+
+--FK Telefono
+
+alter table Telefono
+add constraint FK_Telefono_Cliente foreign key (Id_Cliente) references Cliente(Id_Cliente);
+
+
+--FK Correo
+
+alter table Correo
+add constraint FK_Correo_Cliente foreign key (Id_Cliente) references Cliente(Id_Cliente);
+
+
+--FK Domicilio_Cliente
+
+alter table Domicilio_Cliente
+add constraint FK_Cliente_Domicilio foreign key (Id_Cliente) references Cliente(Id_Cliente);
+
+
+alter table Domicilio_Cliente
+add constraint FK_Tipo_Domicilio foreign key (Id_TipoDomicilio) references TipoDomicilio(Id_TipoDomicilio);
+
+alter table Domicilio_Cliente
+add constraint FK_Domicilio_Cliente_Provincia foreign key (Id_Provincia) references Provincia(Id_Provincia);
+
+--FK Estado_Cuenta
+
+
+alter table Estado_Cuenta
+add constraint FK_Tipo_Estado_Estado_Cuenta foreign key (Id_TipoEstado) references Tipo_Estado(Id_TipoEstado);
+
+
+--FK Provincia
+
+alter table Provincia 
+add constraint FK_Pais_Provincia foreign key (Id_Pais) references Pais(Id_Pais);
+
+--FK Productos
+
+alter table TipoProducto
+add constraint FK_ProductoMarca foreign key (Id_MarcaP) references MarcaProducto(Id_MarcaP);
+
+alter table Producto
+add constraint FK_ProductoTipo foreign key (Id_TipoP) references TipoProducto(Id_TipoP);
+ 
+alter table Partida
+add constraint FK_ProductoPartida foreign key (Id_Producto) references Producto(Id_Producto);
+
+alter table Partida
+add constraint FK_PartidaCantidad foreign key (Id_CantidadT) references TotalProducto(Id_CantidadT);
+
+alter table Partida
+add constraint FK_PartidaDeposito foreign key (Id_Ubicacion) references Ubicacion(Id_Ubicacion);
+
+
+--FK Nota De Producto
+
+
+alter table DetalleNota
+add constraint FK_NotaDetalles foreign key (Id_Nota) references NotaDePedido(Id_Nota);
+
+alter table NotaDePedido
+add constraint FK_NotaCliente foreign key (Id_Cliente) references Cliente(Id_Cliente);
+
+--FK Facturas
+
+alter table Facturacion
+add constraint FK_ClienteFactura foreign key (Id_Cliente) references Cliente(Id_Cliente);
+
+alter table DetalleFactura
+add constraint FK_FacturaDetalle foreign key (Id_Factura) references Facturacion(Id_Factura);
+
+alter table DetalleFactura
+add constraint FK_FacturaPartida foreign key (Id_Partida) references Partida(Id_Partida);

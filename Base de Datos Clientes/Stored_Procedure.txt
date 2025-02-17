@@ -1,0 +1,505 @@
+Create procedure SP_Ingresar_Cliente
+@RazonSocial varchar(10) ,
+@NroReferencia varchar(15) ,
+@CUIL varchar(11) ,
+@Id_Tipo int  ,
+@Id_Estado int 
+as begin
+insert into Cliente (RazonSocial,NroReferencia,CUIL,Id_Tipo,Id_Estado)
+values(@RazonSocial,@NroReferencia,@CUIL,@Id_Tipo,@Id_Estado);
+end
+go
+--------------
+create procedure SP_Actualizar_Cliente
+@Id_Cliente int,
+@RazonSocial varchar(10),
+@NroReferencia varchar(15) ,
+@CUIL varchar(11) ,
+@Id_Tipo int ,
+@Id_Estado int 
+as begin
+Update Cliente set 
+    RazonSocial = @RazonSocial,
+    NroReferencia = @NroReferencia,
+    CUIL = @CUIL,
+    Id_Tipo = @Id_Tipo,
+    Id_Estado =@Id_Estado 
+where Id_Cliente = @Id_Cliente;
+end
+go
+-----------------------
+Create procedure SP_Ingresar_Telefono
+@Telefono varchar(16)  ,
+@Detalles varchar(100)  ,
+@Id_Cliente int
+as begin
+insert into Telefono (Telefono,Detalles,Id_Cliente)
+values(@Telefono,@Detalles,@Id_Cliente);
+end
+go
+
+
+create procedure SP_Actualizar_Telefono
+@Id_Telefono int,
+@Telefono varchar(16)  ,
+@Detalles varchar(100) ,
+@Id_Cliente int 
+as begin
+Update Telefono set 
+Telefono = @Telefono,
+Detalles = @Detalles,
+Id_Cliente = @Id_Cliente
+where Id_Telefono = @Id_Telefono;
+end
+go
+------
+
+Create procedure SP_Ingresar_Correo
+@Correo varchar(64)  ,
+@Detalles varchar(100) ,
+@Id_Cliente int
+as begin
+insert into Correo (Correo,Detalles,Id_Cliente)
+values(@Correo,@Detalles,@Id_Cliente);
+end
+go
+create procedure SP_Actualizar_Correo
+@Id_Correo int,
+@Correo varchar(64)  ,
+@Detalles varchar(100),
+@Id_Cliente int 
+as begin
+Update Correo set 
+Correo = @Correo,
+Detalles = @Detalles,
+Id_Cliente = @Id_Cliente
+where Id_Correo = @Id_Correo;
+end
+go
+------
+Create procedure SP_Ingresar_Estado_Cuenta
+@Id_TipoEstado int,
+@Detalles varchar(30) 
+as begin
+insert into Estado (Id_TipoEstado,Detalles)
+values(@Id_TipoEstado,@Detalles);
+end
+go
+
+create procedure SP_Actualizar_Estado_Cuenta
+@Id_Estado int,
+@Id_TipoEstado int,
+@Detalles varchar(30) 
+as begin
+Update Estado set 
+Id_TipoEstado = @Id_TipoEstado,
+Detalles = @Detalles
+where Id_Estado = @Id_Estado;
+end
+go
+------
+Create procedure SP_Ingresar_Tipo_Estado
+@Estado varchar(20) 
+as begin
+insert into Tipo_Estado(Estado)
+values(@Estado);
+end
+go
+
+create procedure SP_Actualizar_Tipo_Estado
+@Id_TipoEstado int,
+@Estado varchar(20)
+as begin
+Update Tipo_Estado set 
+Estado = @Estado
+where Id_TipoEstado = @Id_TipoEstado;
+end
+go
+------
+Create procedure SP_Ingresar_DetalleNota
+@Id_Nota int,
+@Precio int,
+@Cantidad int,
+@MarcaP varchar(20),
+@TipoProd varchar(20),
+@Descripcion varchar(100)
+as begin
+insert into DetalleNota(Id_Nota,Precio,Cantidad,MarcaP,TipoProd,Descripcion)
+values(@Id_Nota,@Precio,@Cantidad,@MarcaP,@TipoProd,@Descripcion);
+end
+go
+create procedure SP_Actualizar_DetalleNota
+@Id_DNota int,
+@Id_Nota int,
+@Precio int,
+@Cantidad int,
+@MarcaP varchar(20),
+@TipoProd varchar(20),
+@Descripcion varchar(100)
+as begin
+Update DetalleNota set 
+Id_Nota =@Id_Nota,
+Precio = @Precio,
+Cantidad =  @Cantidad,
+MarcaP=@MarcaP ,
+TipoProd=@TipoProd ,
+Descripcion=@Descripcion
+where Id_DNota = @Id_DNota;
+end
+go
+------
+Create procedure SP_Ingresar_NotaDePedido
+@NroReferencia int,
+@Estado int,
+@fecha varchar(20),
+@Id_Cliente varchar(20)
+as begin
+insert into NotaDePedido (NroReferencia,Estado,fecha,Id_Cliente)
+values(@NroReferencia,@Estado,@fecha,@Id_Cliente);
+end
+go
+create procedure SP_Actualizar_NotaDePedido
+@Id_Nota int,
+@NroReferencia int,
+@Estado int,
+@fecha varchar(20),
+@Id_Cliente varchar(20)
+as begin
+Update NotaDePedido set 
+NroReferencia =@NroReferencia,
+Estado = @Estado,
+fecha =  @fecha,
+Id_Cliente=@Id_Cliente
+where Id_Nota = @Id_Nota;
+end
+go
+------
+Create procedure SP_Ingresar_Domicilio_Cliente
+@Id_DomicilioC int,
+@Id_Provincia int,
+@Ciudad varchar(50),
+@Calle varchar(30),
+@Altura varchar(8),
+@Piso varchar(20),
+@Departamento varchar(30),
+@Id_TipoDomicilio int,
+@Id_Cliente int
+as begin
+insert into Domicilio_Cliente (Id_Provincia,Calle,Altura,Id_TipoDomicilio,Id_Cliente,Ciudad,Piso,Departamento)
+values(@Id_Provincia,@Calle,@Altura,@Id_TipoDomicilio,@Id_Cliente,@Ciudad,@Piso,@Departamento);
+end
+go
+
+
+create procedure SP_Actualizar_Domicilio_Cliente
+@Id_DomicilioC int,
+@Id_Provincia int,
+@Ciudad varchar(50),
+@Calle varchar(30),
+@Altura varchar(8),
+@Piso varchar(20),
+@Departamento varchar(30),
+@Id_TipoDomicilio int,
+@Id_Cliente int
+as begin
+Update Domicilio_Cliente set 
+Id_Provincia =@Id_Provincia,
+Ciudad = @Ciudad,
+Calle = @Calle,
+Altura =  @Altura,
+Piso = @Piso,
+Departamento = @Departamento,
+Id_TipoDomicilio = @Id_TipoDomicilio,
+Id_Cliente=@Id_Cliente
+where Id_DomicilioC = @Id_DomicilioC;
+end
+go
+------
+Create procedure SP_Ingresar_TipoDomicilio
+@Tipo_Domicilio varchar(10)
+as begin
+insert into TipoDomicilio (Tipo_Domicilio)
+values(@Tipo_Domicilio);
+end
+go
+
+
+create procedure SP_Actualizar_TipoDomicilio
+@Id_TipoDomicilio int,
+@Tipo_Domicilio varchar(10)
+as begin
+Update TipoDomicilio set 
+Tipo_Domicilio=@Tipo_Domicilio
+where Id_TipoDomicilio = @Id_TipoDomicilio;
+end
+go
+------
+Create procedure SP_Ingresar_Provincia
+@Provincia varchar(20),
+@Id_Pais int
+as begin
+insert into Provincia (Provincia,Id_Pais)
+values(@Provincia,@Id_Pais);
+end
+go
+
+create procedure SP_Actualizar_Provincia
+@Id_Provincia int,
+@Provincia varchar(20),
+@Id_Pais int
+as begin
+Update Provincia set 
+Provincia=@Provincia,
+Id_Pais = @Id_Pais
+where Id_Provincia = @Id_Provincia;
+end
+go
+
+-------
+Create procedure SP_Ingresar_Pais
+@Pais varchar(30)
+as begin
+insert into Pais (Pais)
+values(@Pais);
+end
+go
+
+create procedure SP_Actualizar_Pais
+@Id_Pais int,
+@Pais varchar(30)
+as begin
+Update Pais set 
+Pais=@Pais
+where Id_Pais = @Id_Pais;
+end
+go
+------
+Create procedure SP_Ingresar_TipoEmpresa
+@Tipo varchar(10)
+as begin
+insert into TipoEmpresa (Tipo)
+values(@Tipo);
+end
+go
+
+
+create procedure SP_Actualizar_TipoEmpresa
+@Id_Tipo int,
+@Tipo varchar(10)
+as begin
+Update TipoEmpresa set 
+Tipo=@Tipo
+where Id_Tipo = @Id_Tipo;
+end
+go
+------
+
+Create Procedure SP_Ingresar_Factura
+@NroFactura int ,
+@Id_Cliente int ,
+@Fecha date ,
+@EstadoFac varchar(10) ,
+@TotalCobrar int 
+as begin
+insert into Facturación (NroFactura,Id_Cliente,Fecha,EstadoFac,TotalCobrar)
+values(@NroFactura,@Id_Cliente,@Fecha,@EstadoFac,@TotalCobrar);
+end
+go
+
+create procedure SP_Actualizar_Factura
+@Id_Factura int,
+@NroFactura int ,
+@Id_Cliente int ,
+@Fecha date ,
+@EstadoFac varchar(10) ,
+@TotalCobrar int 
+as begin
+Update Facturacion set 
+NroFactura = @NroFactura,
+Id_Cliente = @Id_Cliente,
+Fecha = @Fecha,
+EstadoFac = @EstadoFac,
+TotalCobrar = @TotalCobrar
+where Id_Factura = @Id_Factura;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_DetalleFactura
+@Id_Factura int ,
+@Precio int ,
+@Cantidad int ,
+@Id_Partida int 
+as begin
+insert into DetalleFactura (Id_Factura,Precio,Cantidad,Id_Partida)
+values(@Id_Factura,@Precio,@Cantidad,@Id_Partida);
+end
+go
+
+create procedure SP_Actualizar_DetalleFactura
+@Id_DFactura int ,
+@Id_Factura int ,
+@Precio int ,
+@Cantidad int ,
+@Id_Partida int 
+as begin
+Update DetalleFactura set 
+Id_Factura = @Id_Factura,
+Precio = @Precio,
+Cantidad = @Cantidad,
+Id_Partida = @Id_Partida
+where Id_DFactura = @Id_DFactura;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_Partida
+@NroPartida varchar(30) ,
+@Vencimiento date ,
+@Id_Ubicacion int ,
+@Cantidad int ,
+@Id_Producto int ,
+@Id_CantidadT int 
+as begin
+insert into Partida (NroPartida,Vencimiento,Id_Ubicacion,Cantidad,Id_Producto,Id_CantidadT)
+values(@NroPartida,@Vencimiento,@Id_Ubicacion,@Cantidad,@Id_Producto,@Id_CantidadT);
+end
+go
+
+
+create procedure SP_Actualizar_Partida
+@Id_Partida int ,
+@NroPartida varchar(30) ,
+@Vencimiento date ,
+@Id_Ubicacion int ,
+@Cantidad int ,
+@Id_Producto int ,
+@Id_CantidadT int 
+as begin
+Update Partida set 
+NroPartida = @NroPartida,
+Vencimiento = @Vencimiento,
+Id_Ubicacion = @Id_Ubicacion,
+Cantidad = @Cantidad,
+Id_Producto = @Id_Producto,
+Id_CantidadT = @Id_CantidadT
+where Id_Partida = @Id_Partida;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_Ubicacion
+@Pasillo varchar(10) ,
+@Fila varchar(10) ,
+@Columna varchar(10) 
+as begin
+insert into Ubicacion (Pasillo,Fila,Columna)
+values(@Pasillo,@Fila,@Columna);
+end
+go
+
+create procedure SP_Actualizar_Ubicacion
+@Id_Ubicacion int , 
+@Pasillo varchar(10) ,
+@Fila varchar(10) ,
+@Columna varchar(10) 
+as begin
+Update Ubicacion set 
+Pasillo = @Pasillo,
+Fila = @Fila,
+Columna = @Columna
+where Id_Ubicacion = @Id_Ubicacion;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_TotalProducto
+@Cantidad int
+as begin
+insert into TotalProducto (Cantidad)
+values(@Cantidad);
+end
+go
+
+create procedure SP_Actualizar_TotalProducto
+@Id_CantidadT int , 
+@Cantidad int
+as begin
+Update TotalProducto set 
+Cantidad = @Cantidad
+where Id_CantidadT = @Id_CantidadT;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_Producto
+@Id_TipoP int ,
+@Descripcion varchar(100) ,
+@Precio int
+as begin
+insert into Producto (Id_TipoP,Descripcion,Precio)
+values(@Id_TipoP,@Descripcion,@Precio);
+end
+go
+
+create procedure SP_Actualizar_Producto
+@Id_Producto int ,
+@Id_TipoP int ,
+@Descripcion varchar(100) ,
+@Precio int
+as begin
+Update Producto set 
+Id_TipoP = @Id_TipoP,
+Descripcion = @Descripcion,
+Precio = @Precio
+where Id_Producto = @Id_Producto;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_TipoProducto
+@Id_MarcaP int ,
+@TipoProd varchar(20)
+as begin
+insert into TipoProducto (Id_MarcaP,TipoProd)
+values(@Id_MarcaP,@TipoProd);
+end
+go
+
+create procedure SP_Actualizar_TipoProducto
+@Id_TipoP int ,
+@Id_MarcaP int ,
+@TipoProd varchar(20)
+as begin
+Update TipoProducto set 
+Id_MarcaP = @Id_MarcaP ,
+TipoProd = @TipoProd 
+where Id_TipoP = @Id_TipoP;
+end
+go
+
+-----------------------
+
+Create Procedure SP_Ingresar_MarcaProducto
+@MarcaP varchar(20)
+as begin
+insert into MarcaProducto (MarcaP)
+values(@MarcaP);
+end
+go
+
+create procedure SP_Actualizar_MarcaProducto
+@id_MarcaP int ,
+@MarcaP varchar(20)
+as begin
+Update MarcaProducto set 
+MarcaP = @MarcaP
+where Id_MarcaP = @Id_MarcaP;
+end
+go

@@ -1,0 +1,60 @@
+INSERT INTO Cliente (RazonSocial, NroReferencia, CUIL, Id_Tipo, Id_Estado)
+VALUES ('Plastico', '1', '12237654892', 1, 1);
+
+INSERT INTO TipoEmpresa (Tipo)
+VALUES ('anonima');
+
+INSERT INTO Estado_Cuenta (Id_TipoEstado, Detalles) 
+VALUES (1, 'Inactiva');
+
+INSERT INTO Tipo_Estado (Estado)
+VALUES ('Inactivo');
+
+INSERT INTO Telefono (Telefono, Detalles, Id_Cliente)
+VALUES ('1123458796', 'Just Listening', 1);
+
+INSERT INTO Correo (Correo, Detalles, Id_Cliente)
+VALUES ('Fulanito@gmail.com', 'Wait a minute', 1);
+
+INSERT INTO Domicilio_Cliente (Id_Provincia, Ciudad, Calle, Altura, Piso, Departamento, Id_TipoDomicilio, Id_Cliente)
+VALUES (1, 'Lomas', 'Alsina', '1356', '23', '512', 1, 1);
+
+INSERT INTO Provincia (Provincia, Id_Pais)
+VALUES ('Tucuman', 1);
+
+INSERT INTO Pais (Pais)
+VALUES ('Argentina');
+
+INSERT INTO TipoDomicilio (Tipo_Domicilio)
+VALUES ('Vivienda');
+
+INSERT INTO MarcaProducto (MarcaP)
+VALUES ('Pepitos');
+
+INSERT INTO TipoProducto (Id_MarcaP, TipoProd)
+VALUES (1, 'Refrigerador');
+
+INSERT INTO Producto (Id_TipoP, Descripcion, Precio)
+VALUES (1, 'Producto de Refrigeracion', 350);
+
+INSERT INTO Partida (NroPartida, Vencimiento, Id_Ubicacion, Cantidad, Id_Producto, Id_CantidadT)
+VALUES ('123', '2003-04-11', 1, 2, 1, 1);
+
+INSERT INTO Ubicacion (Pasillo, Fila, Columna)
+VALUES ('12', '3', '4');
+
+INSERT INTO TotalProducto (Cantidad)
+VALUES (2);
+
+INSERT INTO Facturacion (NroFactura, Id_Cliente, Fecha, EstadoFac, TotalCobrar)
+VALUES (2121, 1, '2003-04-11', 'Inactivo', 12500);
+
+INSERT INTO DetalleFactura (Id_Factura, Precio, Cantidad, Id_Partida)
+VALUES (1, 100, 22, 1);
+
+INSERT INTO NotaDePedido (NroReferencia, Estado, Fecha, Id_Cliente)
+VALUES ('12', 'Activo', '2022-05-20', 1);
+
+INSERT INTO DetalleNota (Id_Nota, Precio, Cantidad, MarcaP, TipoProd, Descripcion)
+VALUES (1, 11, 200, 'Manaos', 'Liquido', 'Agua saborizada con gas');
+
